@@ -1,11 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wonderful Students</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        * Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .search-container {
+            margin: 30px auto;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        #search {
+            width: 100%;
+            padding: 15px 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        #search:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+        }
+        
+        #search::placeholder {
+            color: #aaa;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+        
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .student-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .student-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px;
+            position: relative;
+        }
+        
+        .student-name {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .student-age {
+            font-size: 1rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+        }
+        
+        .student-age i {
+            margin-right: 8px;
+        }
+        
+        .student-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .student-info {
+            margin-bottom: 18px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .info-label i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .info-value {
+            color: #555;
+            padding-left: 28px;
+        }
+        
+        .student-bio {
+            background: #f1f8fe;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: auto;
+            border-left: 4px solid var(--primary-color);
+            font-style: italic;
+            color: #444;
+        }
+        
+        .no-results {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 50px;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .students-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  Not ready yet !
+    <div class="container">
+        <header>
+            <h1>My Amazing Students</h1>
+            <p class="subtitle">Get to know our wonderful class of talented and inspiring individuals</p>
+        </header>
+        
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search students by name, address, or age...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <div class="students-grid" id="studentsContainer">
+            <!-- Student cards will be inserted here by JavaScript -->
+        </div>
+    </div>
+    <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <a href="index.html" class="nav-btn">Previous Lesson</a>
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="lec2.html" class="nav-btn">Next Lesson</a>
+        </div>
+    <footer>
+        <p>Created with ❤️ for the best students in the world</p>
+    </footer>
+
+    <script>
+        // Student data
+        const students = [
+            {
+                name: "Arwa Omia Mohammad",
+                address: "White Nile State, Rabak, Block 5",
+                age: "Early twenties",
+                bio: "I am a kind person, I love helping people, and I am patient. One of my passions is cooking. I always enjoy making cakes, pies, and coffee for my family. I feel happiness when I do it."
+            },
+            {
+                name: "Sara Adam Mohammad Mohamedin",
+                address: "White Nile State, Rabak, Block 3",
+                age: "16 years old",
+                bio: "I studied in Almostapal Intermediate and currently study in KTC. I came to Khartoum Training Center because I want to learn English and speak it very well. It will help me communicate and understand other people. It will also help me in university. In my future, I'm going to Ethiopia because I love this state and I want to learn their Amharic language. I love Ethiopian dance."
+            },
+            {
+                name: "Rowida Bdr Elzman",
+                address: "White Nile State, Rabak, Block 3",
+                age: "20 years old",
+                bio: "I'm a mysterious person but I will join university, God willing. Nice to meet you!"
+            },
+            {
+                name: "Wafa Mahmoud Hmad",
+                address: "Block 24",
+                age: "19 years old",
+                bio: "Soon I will study in university. I'm a kind person and I love English so much. In the future I want to be a good speaker. On the weekend I visit my friend. In the future I want to be an engineer."
+            },
+            {
+                name: "Mathani Adam",
+                address: "White Nile, Block 4",
+                age: "16 years old",
+                bio: "I am a student. My dream is to become a doctor. I love watching anime so much."
+            },
+            {
+                name: "Eman Ezz Aldin",
+                address: "Khartoum Omdurman, Om Bada Al Ashra, Block 3",
+                age: "21 years old",
+                bio: "I'm a caring and sensitive individual with big dreams. I'm a people person who values harmony, hope, and fairness."
+            },
+            {
+                name: "Hagar Abd Algfar",
+                address: "White Nile State, Rabak, Block 5",
+                age: "22 years old",
+                bio: "I have passed the Sudanese certificate and I want to join the university. Also I want to improve my English."
+            },
+            {
+                name: "Insaf Muhammad Abd Alraheem",
+                address: "White Nile, Rabak, Block 36",
+                age: "18 years old",
+                bio: "I sat for Sudanese certificate a few months ago. I am in the beginning of my adventurous life. Something in my deep telling me that I am gonna do something amazing for this world."
+            },
+            {
+                name: "Malaz Adil Adam",
+                address: "Rabak, Block 3",
+                age: "18 years old",
+                bio: "I took the Sudanese Certificate exam and applied to the university and now I am waiting for the acceptance result. I love volunteer work and I work in a volunteer organization called A.V.O that helps in charitable works and I love that. That is all."
+            },
+            {
+                name: "Alaa Eddin Salih",
+                address: "White Nile State, Rabak, Block 2",
+                age: "16 years old",
+                bio: "I'm an adventurous young person in life. I'm a calm person. I hope to complete my education, and I want to get 500 million EUR, and I want to visit all the world."
+            }
+        ];
+
+        // Display students
+        const studentsContainer = document.getElementById('studentsContainer');
+        const searchInput = document.getElementById('search');
+
+        function displayStudents(studentsToDisplay) {
+            studentsContainer.innerHTML = '';
+            
+            if (studentsToDisplay.length === 0) {
+                studentsContainer.innerHTML = '<div class="no-results"><i class="fas fa-exclamation-circle"></i> No students found matching your search</div>';
+                return;
+            }
+            
+            studentsToDisplay.forEach(student => {
+                const studentCard = document.createElement('div');
+                studentCard.className = 'student-card';
+                
+                studentCard.innerHTML = `
+                    <div class="student-header">
+                        <h2 class="student-name">${student.name}</h2>
+                        <p class="student-age"><i class="fas fa-birthday-cake"></i> ${student.age}</p>
+                    </div>
+                    <div class="student-body">
+                        <div class="student-info">
+                            <p class="info-label"><i class="fas fa-map-marker-alt"></i> Address</p>
+                            <p class="info-value">${student.address}</p>
+                        </div>
+                        <div class="student-bio">
+                            <p>${student.bio}</p>
+                        </div>
+                    </div>
+                `;
+                
+                studentsContainer.appendChild(studentCard);
+            });
+        }
+
+        // Search functionality
+        function searchStudents() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredStudents = students.filter(student => 
+                student.name.toLowerCase().includes(searchTerm) ||
+                student.address.toLowerCase().includes(searchTerm) ||
+                student.age.toLowerCase().includes(searchTerm) ||
+                student.bio.toLowerCase().includes(searchTerm)
+            );
+            
+            displayStudents(filteredStudents);
+        }
+
+        // Initial display
+        displayStudents(students);
+
+        // Event listeners
+        searchInput.addEventListener('input', searchStudents);
+    </script>
 </body>
-</html>
+  </html>
